@@ -1,8 +1,8 @@
-import ApplicationLogo from '@/Components/App/ApplicationLogo';
+// import ApplicationLogo from '@/Components/App/ApplicationLogo';
 import { Navbar } from '@/Components/App/Navbar';
-import Dropdown from '@/Components/Core/Dropdown';
-import NavLink from '@/Components/Core/NavLink';
-import ResponsiveNavLink from '@/Components/Core/ResponsiveNavLink';
+// import Dropdown from '@/Components/Core/Dropdown';
+// import NavLink from '@/Components/Core/NavLink';
+// import ResponsiveNavLink from '@/Components/Core/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { PropsWithChildren, ReactNode, useState } from 'react';
 
@@ -17,8 +17,7 @@ export default function AuthenticatedLayout({
 
 	return (
 		<div className="min-h-screen bg-gray-100 dark:bg-gray-900">
-			<Navbar></Navbar>
-
+			<Navbar />
 			{header && (
 				<header className="bg-white shadow dark:bg-gray-800">
 					<div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
