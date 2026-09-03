@@ -8,7 +8,7 @@ export const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm max-w-[3840px] mx-auto">
       <div className="flex-1">
-        <Link href={route('dashboard')} className="btn btn-ghost text-xl">KinmelHub</Link>
+        <Link href={route('welcome')} className="btn btn-ghost text-xl">KinmelHub</Link>
       </div>
       <div className="flex-none">
 
@@ -57,7 +57,7 @@ export const Navbar = () => {
         {!user && <>
           <Link
             href={route('login')}
-            className="mr-2 btn"
+            className="mr-2 btn btn-soft "
           >
             log in
           </Link>

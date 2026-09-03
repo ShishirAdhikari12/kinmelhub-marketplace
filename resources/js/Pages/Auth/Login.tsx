@@ -3,6 +3,7 @@ import InputError from '@/Components/Core/InputError';
 import InputLabel from '@/Components/Core/InputLabel';
 import PrimaryButton from '@/Components/Core/PrimaryButton';
 import TextInput from '@/Components/Core/TextInput';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
@@ -29,7 +30,7 @@ export default function Login({
 	};
 
 	return (
-		<GuestLayout>
+		<AuthenticatedLayout>
 			<Head title="Log in" />
 
 			{status && (
@@ -37,74 +38,78 @@ export default function Login({
 					{status}
 				</div>
 			)}
+			<div className='w-full my-16 flex justify-center items-center '>
+				<div className='aura aura-silver'>
+				<form onSubmit={submit} className='fieldset bg-base-200 border-base-300 rounded-box w-sm border p-4 '>
+					<legend className="fieldset-legend text-xl mb-2">Login</legend>
+					<div>
+						<InputLabel htmlFor="email" value="Email" />
 
-			<form onSubmit={submit}>
-				<div>
-					<InputLabel htmlFor="email" value="Email" />
-
-					<TextInput
-						id="email"
-						type="email"
-						name="email"
-						value={data.email}
-						className="mt-1 block w-full"
-						autoComplete="username"
-						isFocused={true}
-						onChange={(e) => setData('email', e.target.value)}
-					/>
-
-					<InputError message={errors.email} className="mt-2" />
-				</div>
-
-				<div className="mt-4">
-					<InputLabel htmlFor="password" value="Password" />
-
-					<TextInput
-						id="password"
-						type="password"
-						name="password"
-						value={data.password}
-						className="mt-1 block w-full"
-						autoComplete="current-password"
-						onChange={(e) => setData('password', e.target.value)}
-					/>
-
-					<InputError message={errors.password} className="mt-2" />
-				</div>
-
-				<div className="mt-4 block">
-					<label className="flex items-center">
-						<Checkbox
-							name="remember"
-							checked={data.remember}
-							onChange={(e) =>
-								setData(
-									'remember',
-									(e.target.checked || false) as false,
-								)
-							}
+						<TextInput
+							id="email"
+							type="email"
+							name="email"
+							value={data.email}
+							className="mt-1 block w-full"
+							autoComplete="username"
+							isFocused={true}
+							onChange={(e) => setData('email', e.target.value)}
 						/>
-						<span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
-							Remember me
-						</span>
-					</label>
-				</div>
 
-				<div className="mt-4 flex items-center justify-end">
-					{canResetPassword && (
-						<Link
-							href={route('password.request')}
-							className="link"
-						>
-							Forgot your password?
-						</Link>
-					)}
+						<InputError message={errors.email} className="mt-2" />
+					</div>
 
-					<PrimaryButton className="ms-4" disabled={processing}>
-						Log in
-					</PrimaryButton>
+					<div className="mt-4">
+						<InputLabel htmlFor="password" value="Password" />
+
+						<TextInput
+							id="password"
+							type="password"
+							name="password"
+							value={data.password}
+							className="mt-1 block w-full"
+							autoComplete="current-password"
+							onChange={(e) => setData('password', e.target.value)}
+						/>
+
+						<InputError message={errors.password} className="mt-2" />
+					</div>
+
+					<div className="mt-4 block">
+						<label className="flex items-center">
+							<Checkbox
+								name="remember"
+								checked={data.remember}
+								onChange={(e) =>
+									setData(
+										'remember',
+										(e.target.checked || false) as false,
+									)
+								}
+							/>
+							<span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+								Remember me
+							</span>
+						</label>
+					</div>
+
+					<div className="mt-4 flex items-center justify-end">
+						{canResetPassword && (
+							<Link
+								href={route('password.request')}
+								className="link"
+							>
+								Forgot your password?
+							</Link>
+						)}
+
+						<PrimaryButton className="ms-4" disabled={processing}>
+							Log in
+						</PrimaryButton>
+					</div>
+				</form>
 				</div>
-			</form>
-		</GuestLayout>
+			</div>
+		</AuthenticatedLayout>
 	);
 }
