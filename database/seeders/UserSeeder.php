@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@example.com',
             'password' => bcrypt('admin@12345'),
         ])->assignRole(RolesEnum::Admin->value);
     }
