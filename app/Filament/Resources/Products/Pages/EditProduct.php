@@ -16,4 +16,8 @@ class EditProduct extends EditRecord
             DeleteAction::make(),
         ];
     }
+    public static function getNavigationLabel(): string
+    {
+        return 'Edit Product';
+    }
 }

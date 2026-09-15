@@ -8,20 +8,25 @@ use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
 // use App\Filament\Resources\Products\Schemas\ProductForm;
-use App\Filament\Resources\Products\Tables\ProductsTable;
+// use App\Filament\Resources\Products\Tables\ProductsTable;
+use App\Filament\Resources\Products\Pages\ProductImages;
 use App\Models\Product;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
+// use Filament\Actions\BulkActionGroup;
+// use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Pages\Enums\SubNavigationPosition;
+use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
@@ -31,6 +36,8 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::End;
 
     public static function form(Schema $schema): Schema
     {
@@ -124,9 +131,10 @@ class ProductResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                // Filter::make('verified')
-                //     ->query(fn(Builder $query): Builder => $query->whereNotNull('email_verified_at')),
-                // ...
+                SelectFilter::make('status')
+                    ->options(ProductStatusEnum::labels()),
+                SelectFilter::make('department_id')
+                    ->relationship('department', 'name')
             ])
             ->recordActions([
                 EditAction::make(),
@@ -152,7 +160,16 @@ class ProductResource extends Resource
             'index' => ListProducts::route('/'),
             'create' => CreateProduct::route('/create'),
             'edit' => EditProduct::route('/{record}/edit'),
+            'images' => Pages\ProductImages::route('/{record}/images'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            EditProduct::class,
+            ProductImages::class,
+        ]);
     }
 
     public static function canViewAny(): bool
@@ -161,4 +178,5 @@ class ProductResource extends Resource
 
         return $user && $user->hasRole(RolesEnum::Vendor);
     }
+
 }
