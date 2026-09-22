@@ -12,6 +12,8 @@ class ProductImages extends EditRecord
 {
     protected static string $resource = ProductResource::class;
 
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-c-photo';
+
     public function form(Schema $schema): Schema
     {
         return $schema
