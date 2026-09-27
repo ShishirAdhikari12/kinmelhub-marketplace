@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Products;
 
-use App\Enums\Enums\ProductStatusEnum;
+use App\Enums\ProductStatusEnum;
 use App\Enums\RolesEnum;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
