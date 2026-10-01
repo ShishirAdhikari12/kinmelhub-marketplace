@@ -10,6 +10,7 @@ use App\Filament\Resources\Products\Pages\ListProducts;
 // use App\Filament\Resources\Products\Schemas\ProductForm;
 // use App\Filament\Resources\Products\Tables\ProductsTable;
 use App\Filament\Resources\Products\Pages\ProductImages;
+use App\Filament\Resources\Products\Pages\ProductVariations;
 use App\Filament\Resources\Products\Pages\ProductVariationTypes;
 use App\Models\Product;
 use BackedEnum;
@@ -169,6 +170,7 @@ class ProductResource extends Resource
             'edit' => EditProduct::route('/{record}/edit'),
             'images' => Pages\ProductImages::route('/{record}/images'),
             'variation-types' => Pages\ProductVariationTypes::route('/{record}/variation-types'),
+            'variations' => Pages\ProductVariations::route('/{record}/variations'),
         ];
     }
 
@@ -178,6 +180,7 @@ class ProductResource extends Resource
             EditProduct::class,
             ProductImages::class,
             ProductVariationTypes::class,
+            ProductVariations::class,
         ]);
     }
 
