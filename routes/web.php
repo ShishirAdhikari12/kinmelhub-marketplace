@@ -1,13 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-// use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
-})->name('dashboard');
+Route::get('/', [ProductController::class, 'home'])->name('dashboard');
+Route::get('/product/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 
 
 Route::middleware('auth')->group(function () {
