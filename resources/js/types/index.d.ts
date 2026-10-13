@@ -33,7 +33,7 @@ export type Product = {
     title: string;
     slug: string;
     price: number;
-    quentity: number;
+    quantity: number;
     image: string;
     images: Image[];
     short_description: string;
